@@ -1,0 +1,39 @@
+
+Relationmodel - Hotel - by Lukas Sattler
+
+	hotelRoom(Number:int, Persons:int, roomAttendant-SVNR:varchar)
+		PK, Attr, FK
+
+	category(ID:enum, Name:varchar, hotelRoom-Number:int, booking-from:date, booking-to:date)
+		PK, Attr, FK, FK, FK
+
+	booking(from:date, to:date, guest-customerNumber:varchar, category-ID:enum, package-Design:enum)
+		Attr, Attr, FPK, FPK, FPK
+
+	guest(customerNumber:varchar, Name:varchar, Address:varchar, booking-from:date, booking-to:date)
+		PK, Attr, Attr, FK, FK
+
+	package(Design:enum, Price:numeric, caretaker-SVNR:varchar, booking-from:date, booking-to:date)
+		PK, Attr, FK, FK, FK
+
+	basicPackage(Design:enum, Price:numeric)
+		PK, Attr
+
+	luxuryPackage(Design:enum, Price:numeric)
+		PK, Attr
+
+	employee(SVNR:varchar, Name:varchar, Address:varchar)
+		PK, Attr, Attr
+
+	roomAttendant(SVNR:varchar, Name:varchar, Address:varchar, hotelRoom-Number:int)
+		PK, Attr, Attr, FK
+
+	caretaker(SVNR:varchar, Name:varchar, Address:varchar, package-Design:enum)
+		PK, Attr, Attr, FK
+
+crosstables:
+	caretakerResponsibleForPackage(caretaker-SVNR:varchar, packages-Design:enum)
+		PK, PK
+
+	bookingOrderPackages(booking-from:date, booking-to:date, packages-Design:enum, quantity:int)
+		PK, PK, PK, Attr
